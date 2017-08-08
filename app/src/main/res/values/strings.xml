@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SSchat</string>
+    <string name="facebook_app_id">135834593681514</string>
+    <string name="fb_login_protocol_scheme">fb135834593681514</string>
 </resources>
