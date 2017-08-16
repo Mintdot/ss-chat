@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(MainActivity.this)
-                        .setMessage("Signout ?")
-                        .setPositiveButton("signout", new DialogInterface.OnClickListener() {
+                        .setMessage("로그아웃하시겠습니까?")
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 mFirebaseAuth.signOut();
@@ -48,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                                 Intent intent = new Intent(MainActivity.this, SignInActivity.class);
                                 startActivity(intent);
                                 finish();
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                return;
                             }
                         }).show();
             }
@@ -67,10 +73,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
             }
             TextView usernameTextView = (TextView) findViewById(R.id.username_textview);
-            usernameTextView.setText(mUsername);
+            usernameTextView.setText(mUsername + "님");
 
             Toast.makeText(this, mUsername + "님 환영합니다.", Toast.LENGTH_SHORT).show();
         }
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API)

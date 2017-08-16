@@ -37,9 +37,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
 
         setTitle("Login");
 
-                        /*
-          * Firebase
-          */
+        // TODO: Firebase
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -58,9 +56,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
             }
         };
 
-                        /*
-          *  Google Login
-          */
+        // TODO: Google Login
         mSigninGoogleButton = (SignInButton) findViewById(R.id.sign_in_google_button);
         mSigninGoogleButton.setOnClickListener(new View.OnClickListener() {
             @Override
