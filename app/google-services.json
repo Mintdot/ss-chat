@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "481579009908",
+    "firebase_url": "https://sschat-41015.firebaseio.com",
+    "project_id": "sschat-41015",
+    "storage_bucket": "sschat-41015.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481579009908:android:d7a0def37cc89c7f",
+        "android_client_info": {
+          "package_name": "com.smartspatial.sschat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481579009908-ckbmir570hmnp9dj6be53id6hisc43ho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smartspatial.sschat",
+            "certificate_hash": "e59515a92b4091a4bf370fb93751296b4b48f40f"
+          }
+        },
+        {
+          "client_id": "481579009908-l4e14ipvfdt4log2b5a3e63kvculepm3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-fwA8jA8JiTPs2Ff01R11T7GdgvE9qYw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "481579009908-l4e14ipvfdt4log2b5a3e63kvculepm3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
