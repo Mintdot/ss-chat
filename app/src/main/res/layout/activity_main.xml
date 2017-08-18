@@ -11,16 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
-        android:popupTheme="@style/AppTheme"
-        android:weightSum="1">
-
-        <!--<Button-->
-        <!--android:id="@+id/logout_button"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_gravity="right"-->
-        <!--android:text="logout"-->
-        <!--android:textSize="10dp" />-->
+        android:popupTheme="@style/AppTheme">
 
         <ImageButton
             android:id="@+id/logout_button"
@@ -34,13 +25,30 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <ListView
+        android:id="@+id/chat_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
-    <!--<TextView-->
-    <!--android:id="@+id/username_textview"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:textAlignment="center"-->
-    <!--android:textSize="24dp" />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/chat_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/chat_send"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="전송" />
+
+    </LinearLayout>
 
 
 </LinearLayout>
