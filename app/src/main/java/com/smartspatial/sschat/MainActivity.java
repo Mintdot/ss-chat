@@ -2,11 +2,14 @@ package com.smartspatial.sschat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +23,16 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -38,14 +49,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
-    private ListView listView;
+    private ListView chatview;
     private EditText editText;
     private Button button;
+
+    ArrayList<ChatDTO> items;
+    ListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -82,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
             Intent intent = new Intent(MainActivity.this, SignInActivity.class);
             startActivity(intent);
+            Log.d("check","회원가입으로 이동");
             finish();
         } else {
             mUsername = mFirebaseUser.getDisplayName();
@@ -100,10 +116,37 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         // TODO: Chat
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        databaseReference.child("ChatDB").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
+                items.add(chatDTO);
+                adapter.notifyDataSetChanged();
+            }
 
-        listView = (ListView) findViewById(R.id.chat_view);
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+
+
+        chatview = (ListView) findViewById(R.id.chat_view);
         editText = (EditText) findViewById(R.id.chat_edit);
         button = (Button) findViewById(R.id.chat_send);
+
+        items = new ArrayList<>();
+        adapter = new ListAdapter(this, items);
+        chatview.setAdapter(adapter);
+        items.clear();
+        Log.d("check","어댑터 연결");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,12 +155,51 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     return;
 
                 ChatDTO chat = new ChatDTO(mUsername, editText.getText().toString());
-                databaseReference.push().setValue(chat);
+                databaseReference.child("ChatDB").push().setValue(chat);
                 editText.setText("");
             }
         });
 
+        getMessage();
     }
+
+
+    //메세지 받아오기
+    private void getMessage(){
+        databaseReference.child("ChatDB").addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e("data", dataSnapshot.toString());
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                    for (Map.Entry<String, Object> entry : map.entrySet()) {
+
+                        Map data = (Map) entry.getValue();
+                        ChatDTO chatdto = new ChatDTO((String) data.get("userName"), (String) data.get("message"));
+                        items.add(chatdto);
+
+                    }
+
+                adapter.notifyDataSetChanged();
+                Log.d("check","어댑터추가");
+                databaseReference.removeEventListener(this);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), "채팅에러",Toast.LENGTH_LONG);
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        adapter.notifyDataSetChanged();
+        items.clear();
+        super.onDestroy();
+
+    }
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

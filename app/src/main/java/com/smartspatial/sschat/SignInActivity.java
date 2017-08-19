@@ -45,7 +45,6 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "sign in");
-
                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -61,6 +60,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         mSigninGoogleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("cehck","회원가입 창 띄움");
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
                 startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN);
             }
@@ -105,7 +105,10 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 AuthCredential credential = GoogleAuthProvider.getCredential(token, null);
                 mFirebaseAuth.signInWithCredential(credential);
             } else {
+                Log.d("cehck","회원가입 실패");
+
                 Log.d(TAG, "Google Login Failed." + result.getStatus());
+
             }
         }
     }
