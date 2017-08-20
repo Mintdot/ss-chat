@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
                         }
-                    } catch (Exception e) {
+                    } catch (NullPointerException e) {
                     }
                 }
 
