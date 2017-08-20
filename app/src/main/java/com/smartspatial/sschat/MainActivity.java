@@ -172,13 +172,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.e("data", dataSnapshot.toString());
                 Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                    for (Map.Entry<String, Object> entry : map.entrySet()) {
+                if(items == null) {
+                    try {
+                        for (Map.Entry<String, Object> entry : map.entrySet()) {
 
-                        Map data = (Map) entry.getValue();
-                        ChatDTO chatdto = new ChatDTO((String) data.get("userName"), (String) data.get("message"));
-                        items.add(chatdto);
+                            Map data = (Map) entry.getValue();
+                            ChatDTO chatdto = new ChatDTO((String) data.get("userName"), (String) data.get("message"));
+                            items.add(chatdto);
 
+
+                        }
+                    } catch (Exception e) {
                     }
+                }
 
                 adapter.notifyDataSetChanged();
                 Log.d("check","어댑터추가");
