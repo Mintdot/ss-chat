@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -60,7 +61,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         mSigninGoogleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("cehck","회원가입 창 띄움");
+                Log.d("check", "로그인 시도");
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
                 startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN);
             }
@@ -105,7 +106,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 AuthCredential credential = GoogleAuthProvider.getCredential(token, null);
                 mFirebaseAuth.signInWithCredential(credential);
             } else {
-                Log.d("cehck","회원가입 실패");
+                Log.d("check", "로그인 실패");
 
                 Log.d(TAG, "Google Login Failed." + result.getStatus());
 
