@@ -24,8 +24,8 @@ public class ListAdapter extends BaseAdapter {
 
     public ListAdapter(Context context, ArrayList<ChatDTO> items) {
         list_inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.context = context;
         this.items = items;
+        this.context = context;
     }
 
     @Override
