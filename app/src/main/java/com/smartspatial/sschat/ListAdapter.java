@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by CX62 on 2017-08-20.
- */
-
 public class ListAdapter extends BaseAdapter {
 
     MainActivity main = new MainActivity();
@@ -46,7 +42,7 @@ public class ListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder;
-        if(convertView == null){
+        if (convertView == null) {
             holder = new Holder();
             convertView = list_inflater.inflate(R.layout.listview_content, null);
             holder.mUsername = (TextView) convertView.findViewById(R.id.itemname);
@@ -63,7 +59,7 @@ public class ListAdapter extends BaseAdapter {
     }
 
 
-    class Holder{
+    class Holder {
         public TextView mUsername;
         public TextView content;
     }

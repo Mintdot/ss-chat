@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SSchat</string>
+    <string name="app_title">SMART SPACE CHAT APP</string>
+    <string name="app_copyright">Copyright(C) 2017. by SMART_SPACE</string>
 </resources>

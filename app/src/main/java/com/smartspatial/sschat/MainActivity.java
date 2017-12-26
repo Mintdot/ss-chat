@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
             Intent intent = new Intent(MainActivity.this, SignInActivity.class);
             startActivity(intent);
-            Log.d("check","회원가입으로 이동");
+            Log.d("check", "회원가입으로 이동");
             finish();
         } else {
             mUsername = mFirebaseUser.getDisplayName();
@@ -125,16 +125,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) { }
+            public void onCancelled(DatabaseError databaseError) {
+            }
         });
 
 
@@ -146,12 +150,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         adapter = new ListAdapter(this, items);
         chatview.setAdapter(adapter);
         items.clear();
-        Log.d("check","어댑터 연결");
+        Log.d("check", "어댑터 연결");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editText.getText().toString().equals(""))
+                if (editText.getText().toString().equals(""))
                     return;
 
                 ChatDTO chat = new ChatDTO(mUsername, editText.getText().toString());
@@ -165,14 +169,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     //메세지 받아오기
-    private void getMessage(){
+    private void getMessage() {
         databaseReference.child("ChatDB").addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.e("data", dataSnapshot.toString());
                 Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                if(items == null) {
+                if (items == null) {
                     try {
                         for (Map.Entry<String, Object> entry : map.entrySet()) {
 
@@ -187,13 +191,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 }
 
                 adapter.notifyDataSetChanged();
-                Log.d("check","어댑터추가");
+                Log.d("check", "어댑터추가");
                 databaseReference.removeEventListener(this);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "채팅에러",Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), "채팅에러", Toast.LENGTH_LONG);
             }
         });
     }
