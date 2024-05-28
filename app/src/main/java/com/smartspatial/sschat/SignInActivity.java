@@ -20,7 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     FirebaseAuth mFirebaseAuth;
     FirebaseAuth.AuthStateListener mFirebaseAuthListener;
@@ -107,7 +106,6 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 Log.d("check", "로그인 실패");
 
                 Log.d(TAG, "Google Login Failed." + result.getStatus());
-
             }
         }
     }
