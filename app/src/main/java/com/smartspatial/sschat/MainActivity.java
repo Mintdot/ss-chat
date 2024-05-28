@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -60,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -140,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
-
         chatview = (ListView) findViewById(R.id.chat_view);
         editText = (EditText) findViewById(R.id.chat_edit);
         button = (Button) findViewById(R.id.chat_send);
@@ -166,8 +163,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         getMessage();
     }
 
-
-    //메세지 받아오기
+    // 메세지 받아오기
     private void getMessage() {
         databaseReference.child("ChatDB").addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -190,13 +186,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 }
 
                 adapter.notifyDataSetChanged();
-                Log.d("check", "어댑터추가");
+                Log.d("check", "어댑터 추가");
                 databaseReference.removeEventListener(this);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "채팅에러", Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), "채팅 에러", Toast.LENGTH_LONG);
             }
         });
     }
@@ -208,7 +204,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onDestroy();
 
     }
-
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
