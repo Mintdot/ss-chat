@@ -11,12 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ListAdapter extends BaseAdapter {
-
     MainActivity main = new MainActivity();
     private ArrayList<ChatDTO> items;
     private Context context;
     LayoutInflater list_inflater;
-
 
     public ListAdapter(Context context, ArrayList<ChatDTO> items) {
         list_inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -57,7 +55,6 @@ public class ListAdapter extends BaseAdapter {
 
         return convertView;
     }
-
 
     class Holder {
         public TextView mUsername;
