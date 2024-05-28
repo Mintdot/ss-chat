@@ -3,7 +3,6 @@ package com.smartspatial.sschat;
 import android.util.Log;
 
 public class ChatDTO {
-
     private String userName;
     private String message;
 
