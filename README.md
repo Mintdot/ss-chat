@@ -1,4 +1,4 @@
-# SSchat
+# SS Chat
 ## 20412문성주 10409김용수 팀 프로젝트
 ### 2017.08.08 - 2017.08.20
 #### [링크](https://play.google.com/store/apps/details?id=com.smartspatial.sschat)
